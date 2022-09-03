@@ -15,9 +15,11 @@ export default function Navbar() {
 						/>
 					</a>
 				</Link>
-				<a>
-					<img src='/basket.svg' alt='Basket Icon' width='40' height='50' />
-				</a>
+				<Link href='/cart'>
+					<a>
+						<img src='/basket.svg' alt='Basket Icon' width='40' height='50' />
+					</a>
+				</Link>
 			</div>
 		</nav>
 	);

@@ -37,8 +37,8 @@ interface ProductProps {
 }
 
 export default function Product({ productData }: ProductProps) {
-	const [quantity, setQuantity] = useState<number>(1);
 	const { addToCart } = useCart();
+	const [quantity, setQuantity] = useState<number>(1);
 
 	const handleDecrement = (quantity: number) => {
 		setQuantity(quantity - 1);
