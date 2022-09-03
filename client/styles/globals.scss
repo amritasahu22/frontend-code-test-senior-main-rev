@@ -1,0 +1,85 @@
+/* Octopus Energy brand colours used in the design */
+$hemocyanin: #170048;
+$ice: #f0ffff;
+$plum: #600e6b;
+$purpleHaze: #a49fc8;
+$siphon: #100030;
+$sohoLights: #f050f8;
+
+$theme-colors: (
+	'primary': $sohoLights,
+);
+
+$body-bg: $siphon;
+$body-color: $ice;
+
+@import '/node_modules/bootstrap/scss/_functions.scss';
+@import '/node_modules/bootstrap/scss/_variables.scss';
+
+$custom-theme-colors: (
+	'hemocyanin': $hemocyanin,
+	'ice': $ice,
+	'plum': $plum,
+	'purpleHaze': $purpleHaze,
+	'siphon': $siphon,
+	'sohoLights': $sohoLights,
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import '/node_modules/bootstrap/scss/bootstrap.scss';
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Gotham, helvetica, arial, sans-serif;
+	font-weight: 300;
+	font-size: 1.2rem;
+	line-height: 1.5;
+	letter-spacing: normal;
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+}
+
+h1 {
+	font-size: 3rem;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 2rem;
+	font-weight: 400;
+	line-height: 1.6;
+}
+
+h3 {
+	font-size: 1.8rem;
+	font-weight: 400;
+}
+
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0 auto;
+}
+
+footer {
+	font-size: 0.8rem;
+	font-weight: 100;
+}
