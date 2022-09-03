@@ -10,6 +10,7 @@ import styles from '../../styles/Product.module.scss';
 import Price from '../../components/price';
 import Counter from '../../components/counter';
 import Footer from '../../components/footer';
+import { useCart } from '../../hooks/useCart';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const { data } = await getAllProductIds();
@@ -36,8 +37,8 @@ interface ProductProps {
 }
 
 export default function Product({ productData }: ProductProps) {
-	console.log('Product::', productData);
 	const [quantity, setQuantity] = useState<number>(1);
+	const { addToCart } = useCart();
 
 	const handleDecrement = (quantity: number) => {
 		setQuantity(quantity - 1);
@@ -86,7 +87,10 @@ export default function Product({ productData }: ProductProps) {
 							</div>
 
 							<div className='d-grid mt-4'>
-								<button className='btn btn-primary text-siphon btn-lg rounded my-2'>
+								<button
+									className='btn btn-primary text-siphon btn-lg rounded my-2'
+									onClick={() => addToCart(productData, quantity)}
+								>
 									Add to Cart
 								</button>
 							</div>
