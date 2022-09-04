@@ -6,7 +6,6 @@ import { CartContext, useCartState } from '../hooks/useCart';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const cart = useCartState();
-
 	return (
 		<CartContext.Provider value={cart}>
 			<Navbar />

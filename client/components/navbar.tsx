@@ -1,26 +1,31 @@
 import Link from 'next/link';
+import { useCart } from '../hooks/useCart';
 
 export default function Navbar() {
+	const { totalQuantity } = useCart();
 	return (
-		<nav className='navbar'>
-			<div className='container-lg'>
-				<Link href='/'>
-					<a className='navbar-brand'>
-						<img
-							src='/octopus-logo.svg'
-							alt='Octopus Energy Logo'
-							width='200'
-							height='50'
-							title='Go to home page'
-						/>
-					</a>
-				</Link>
+		<header className='container-lg pt-3 d-flex justify-content-between align-items-center'>
+			<Link href='/'>
+				<a className='navbar-brand'>
+					<img
+						src='/octopus-logo.svg'
+						alt='Octopus Energy Logo'
+						width='200'
+						height='40'
+						title='Go to home page'
+					/>
+				</a>
+			</Link>
+			<nav className='navbar'>
 				<Link href='/cart'>
-					<a>
-						<img src='/basket.svg' alt='Basket Icon' width='40' height='50' />
+					<a className='position-relative'>
+						<img src='/basket.svg' alt='Basket Icon' width='35' height='40' />
+						<span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'>
+							{totalQuantity}
+						</span>
 					</a>
 				</Link>
-			</div>
-		</nav>
+			</nav>
+		</header>
 	);
 }

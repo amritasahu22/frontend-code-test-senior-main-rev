@@ -2,24 +2,35 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { IProductField } from '../types/product';
 
 const CART_STATE_KEY = 'cart';
+interface CartItem {
+	id: number;
+	name: string;
+	power: string;
+	pricePerUnit: number;
+	quantity: number;
+	brand: string;
+	img_url: string;
+	qty: number;
+}
+
+const cartItem = {} as CartItem;
 
 const defaultCart = {
-	basketItems: {},
+	basketItems: cartItem,
 };
 
 interface CartContextInterface {
-	cart: { basketItems: {} };
 	addToCart: (product: IProductField, quantity: number) => void;
-	totalPrice: () => number;
-	totalQuantity: () => number;
+	totalPrice: number;
+	totalQuantity: number;
+	cartItems: CartItem[];
+	removeItem: (itemId: number) => void;
 }
 
 export const CartContext = createContext<CartContextInterface | null>(null);
 
 export function useCartState() {
 	const [cart, setCart] = useState(defaultCart);
-
-	console.log('Cart', cart);
 
 	useEffect(() => {
 		const stateFromStorage = localStorage.getItem(CART_STATE_KEY);
@@ -35,25 +46,24 @@ export function useCartState() {
 		window.localStorage.setItem(CART_STATE_KEY, data);
 	}, [cart]);
 
-	function addToCart(product: IProductField, quantity: number) {
-		const { id, name, power, price, brand, img_url } = product;
+	function addToCart(product: IProductField, qty: number) {
+		const { id, name, power, quantity, price, brand, img_url } = product;
 		const pricePerUnit = Number((price / 100).toFixed(2));
-		console.log('PricePErUnit', pricePerUnit);
 
 		let newCart = { ...cart };
 
 		if (newCart.basketItems[id]) {
-			newCart.basketItems[id].quantity =
-				cart.basketItems[id].quantity + quantity;
+			newCart.basketItems[id].qty = cart.basketItems[id].qty + qty;
 		} else {
 			newCart.basketItems[id] = {
 				id,
 				name,
 				power,
+				quantity,
 				pricePerUnit,
 				brand,
 				img_url,
-				quantity,
+				qty,
 			};
 		}
 
@@ -61,27 +71,32 @@ export function useCartState() {
 	}
 
 	const cartItems = Object.keys(cart.basketItems).map(key => {
-		return {
+		const cartItem: CartItem = {
 			...cart.basketItems[key],
 		};
+		return cartItem;
 	});
 
-	const totalPrice = cartItems.reduce(
-		(accumulator, { pricePerUnit, quantity }) => {
-			return accumulator + pricePerUnit * quantity;
-		},
-		0
-	);
-
-	const totalQuantity = cartItems.reduce((accumulator, { quantity }) => {
-		return accumulator + quantity;
+	const totalPrice = cartItems.reduce((accumulator, { pricePerUnit, qty }) => {
+		return accumulator + pricePerUnit * qty;
 	}, 0);
 
+	const totalQuantity = cartItems.reduce((accumulator, { qty }) => {
+		return accumulator + qty;
+	}, 0);
+
+	const removeItem = (itemId: number) => {
+		let newCart = { ...cart };
+		delete newCart.basketItems[itemId];
+		setCart(newCart);
+	};
+
 	return {
-		cart,
 		addToCart,
 		totalQuantity,
 		totalPrice,
+		cartItems,
+		removeItem,
 	};
 }
 

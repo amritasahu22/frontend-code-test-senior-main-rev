@@ -38,14 +38,14 @@ interface ProductProps {
 
 export default function Product({ productData }: ProductProps) {
 	const { addToCart } = useCart();
-	const [quantity, setQuantity] = useState<number>(1);
+	const [qty, setQty] = useState(1);
 
-	const handleDecrement = (quantity: number) => {
-		setQuantity(quantity - 1);
+	const handleDecrement = (qty: number) => {
+		setQty(qty - 1);
 	};
 
-	const handleIncrement = (quantity: number) => {
-		setQuantity(quantity + 1);
+	const handleIncrement = (qty: number) => {
+		setQty(qty + 1);
 	};
 
 	return (
@@ -79,7 +79,7 @@ export default function Product({ productData }: ProductProps) {
 							<div className='d-flex justify-content-between align-items-end'>
 								<Price price={productData.price} />
 								<Counter
-									count={quantity}
+									count={qty}
 									label='Current quantity'
 									onDecrement={handleDecrement}
 									onIncrement={handleIncrement}
@@ -89,7 +89,7 @@ export default function Product({ productData }: ProductProps) {
 							<div className='d-grid mt-4'>
 								<button
 									className='btn btn-primary text-siphon btn-lg rounded my-2'
-									onClick={() => addToCart(productData, quantity)}
+									onClick={() => addToCart(productData, qty)}
 								>
 									Add to Cart
 								</button>
