@@ -1,3 +1,3 @@
 export default function Products() {
-	return <div>PRODUCTS PAGE</div>;
+	return <div className='text-center'>PRODUCTS CATALOG PAGE</div>;
 }

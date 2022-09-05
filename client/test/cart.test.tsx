@@ -22,7 +22,7 @@ test('should render a message when cart is empty and show correct subTotal', asy
 		</CartContext.Provider>
 	);
 
-	const message = queryByText(/There is no item in your cart/);
+	const message = queryByText(/Your shopping bag is empty/);
 	expect(message).toBeInTheDocument();
 	const subTotal = getByTitle('subtotal');
 	expect(subTotal).toHaveTextContent('0');
@@ -43,7 +43,7 @@ test('should not render a message when cart has items and show correct subTotal'
 		</CartContext.Provider>
 	);
 
-	const message = queryByText(/There is no item in your cart/);
+	const message = queryByText(/Your shopping bag is empty/);
 	expect(message).toBeNull();
 	const subTotal = getByTitle('subtotal');
 	expect(subTotal).toHaveTextContent('£10.99');

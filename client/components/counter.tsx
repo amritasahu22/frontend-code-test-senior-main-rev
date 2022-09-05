@@ -33,7 +33,11 @@ export default function Counter({
 			<span className='mx-2 fs-2' title={label}>
 				{count}
 			</span>
-			<button className={disabledClasses()} onClick={() => onIncrement(count)}>
+			<button
+				className={disabledClasses()}
+				onClick={() => onIncrement(count)}
+				disabled={count === 10}
+			>
 				+
 			</button>
 		</div>

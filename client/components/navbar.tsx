@@ -20,7 +20,7 @@ export default function Navbar() {
 			</Link>
 			<nav className='navbar'>
 				<Link href='/cart'>
-					<a className='position-relative'>
+					<a className='position-relative me-2'>
 						<img src='/basket.svg' alt='Basket Icon' width='35' height='40' />
 						<span
 							className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
