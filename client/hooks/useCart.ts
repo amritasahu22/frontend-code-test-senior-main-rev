@@ -1,17 +1,8 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IProductField } from '../types/product';
+import { CartItem } from '../types/cart';
 
 const CART_STATE_KEY = 'cart';
-interface CartItem {
-	id: number;
-	name: string;
-	power: string;
-	pricePerUnit: number;
-	quantity: number;
-	brand: string;
-	img_url: string;
-	qty: number;
-}
 
 const cartItem = {} as CartItem;
 
@@ -19,17 +10,7 @@ const defaultCart = {
 	basketItems: cartItem,
 };
 
-interface CartContextInterface {
-	addToCart: (product: IProductField, quantity: number) => void;
-	totalPrice: number;
-	totalQuantity: number;
-	cartItems: CartItem[];
-	removeItem: (itemId: number) => void;
-}
-
-export const CartContext = createContext<CartContextInterface | null>(null);
-
-export function useCartState() {
+export function useCart() {
 	const [cart, setCart] = useState(defaultCart);
 
 	useEffect(() => {
@@ -46,7 +27,7 @@ export function useCartState() {
 		window.localStorage.setItem(CART_STATE_KEY, data);
 	}, [cart]);
 
-	function addToCart(product: IProductField, qty: number) {
+	const addToCart = (product: IProductField, qty: number) => {
 		const { id, name, power, quantity, price, brand, img_url } = product;
 		const pricePerUnit = Number((price / 100).toFixed(2));
 
@@ -68,7 +49,7 @@ export function useCartState() {
 		}
 
 		setCart(newCart);
-	}
+	};
 
 	const cartItems = Object.keys(cart.basketItems).map(key => {
 		const cartItem: CartItem = {
@@ -98,9 +79,4 @@ export function useCartState() {
 		cartItems,
 		removeItem,
 	};
-}
-
-export function useCart() {
-	const cart = useContext(CartContext);
-	return cart;
 }

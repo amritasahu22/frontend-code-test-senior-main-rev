@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import { useCart } from '../hooks/useCart';
+import CartContext from '../context/cartContext';
+import { useContext } from 'react';
 
 export default function Navbar() {
-	const { totalQuantity } = useCart();
+	const cartContext = useContext(CartContext);
+
 	return (
 		<header className='container-lg pt-3 d-flex justify-content-between align-items-center'>
 			<Link href='/'>
@@ -20,8 +22,11 @@ export default function Navbar() {
 				<Link href='/cart'>
 					<a className='position-relative'>
 						<img src='/basket.svg' alt='Basket Icon' width='35' height='40' />
-						<span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'>
-							{totalQuantity}
+						<span
+							className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
+							title='Basket items'
+						>
+							{cartContext?.totalQuantity}
 						</span>
 					</a>
 				</Link>

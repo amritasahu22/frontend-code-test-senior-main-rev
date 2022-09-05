@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import styles from '../styles/components/Counter.module.scss';
 
 interface CounterProps {
@@ -16,7 +15,8 @@ export default function Counter({
 }: CounterProps) {
 	const disabledClasses = () => {
 		let classes = 'btn btn-primary btn-lg rounded-4 text-siphon';
-		return (classes += count === 1 ? 'btn-plum' : 'btn-primary');
+		return (classes +=
+			count === 1 || count === 10 ? 'btn-plum' : 'btn-primary');
 	};
 
 	return (
@@ -26,16 +26,14 @@ export default function Counter({
 				className={disabledClasses()}
 				disabled={count === 1}
 				onClick={() => onDecrement(count)}
+				data-testid='decrement'
 			>
 				-
 			</button>
 			<span className='mx-2 fs-2' title={label}>
 				{count}
 			</span>
-			<button
-				className={cn(`btn btn-primary btn-lg rounded-4 text-siphon`)}
-				onClick={() => onIncrement(count)}
-			>
+			<button className={disabledClasses()} onClick={() => onIncrement(count)}>
 				+
 			</button>
 		</div>

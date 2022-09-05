@@ -2,10 +2,11 @@ import type { AppProps } from 'next/app';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/globals.scss';
 import Navbar from '../components/navbar';
-import { CartContext, useCartState } from '../hooks/useCart';
+import CartContext from '../context/cartContext';
+import { useCart } from '../hooks/useCart';
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const cart = useCartState();
+	const cart = useCart();
 	return (
 		<CartContext.Provider value={cart}>
 			<Navbar />

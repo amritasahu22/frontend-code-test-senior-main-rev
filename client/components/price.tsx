@@ -6,7 +6,7 @@ export default function Price({ price }: PriceProps) {
 	const formattedPrice = (price / 100).toFixed(2);
 
 	return (
-		<p className='display-6' title='Price'>
+		<p className='display-6' title='price'>
 			&pound;{formattedPrice}
 		</p>
 	);

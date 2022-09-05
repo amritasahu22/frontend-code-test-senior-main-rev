@@ -6,6 +6,6 @@ test('should be able to increase and decrease product quantity', async () => {
 
 	const { getByTitle } = render(<Price price={mockPrice} />);
 
-	const price = getByTitle('Price');
+	const price = getByTitle('price');
 	expect(price).toHaveTextContent('£11.89');
 });

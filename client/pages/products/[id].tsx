@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Head from 'next/head';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { IProductField } from '../../types/product';
@@ -10,10 +10,11 @@ import styles from '../../styles/Product.module.scss';
 import Price from '../../components/price';
 import Counter from '../../components/counter';
 import Footer from '../../components/footer';
-import { useCart } from '../../hooks/useCart';
+import CartContext from '../../context/cartContext';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const { data } = await getAllProductIds();
+
 	const paths = data?.allProducts.map(product => ({
 		params: { id: product.pk.toString() },
 	}));
@@ -37,7 +38,7 @@ interface ProductProps {
 }
 
 export default function Product({ productData }: ProductProps) {
-	const { addToCart } = useCart();
+	const cartContext = useContext(CartContext);
 	const [qty, setQty] = useState(1);
 
 	const handleDecrement = (qty: number) => {
@@ -89,9 +90,9 @@ export default function Product({ productData }: ProductProps) {
 							<div className='d-grid mt-4'>
 								<button
 									className='btn btn-primary text-siphon btn-lg rounded my-2'
-									onClick={() => addToCart(productData, qty)}
+									onClick={() => cartContext?.addToCart(productData, qty)}
 								>
-									Add to Cart
+									Add to cart
 								</button>
 							</div>
 						</div>
