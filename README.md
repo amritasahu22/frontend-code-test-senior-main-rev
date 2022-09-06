@@ -69,8 +69,8 @@ Notes:
 Best of luck!
 
 ## Pages
-Product Details - http://localhost:3000/products/1, http://localhost:3000/products/2, http://localhost:3000/products/3
-Cart - http://localhost:3000/cart
+- Product Details - http://localhost:3000/products/1, http://localhost:3000/products/2, http://localhost:3000/products/3
+- Cart - http://localhost:3000/cart
 
 ## Improvements
 - Increment and decrease quantity component can be added to cart page
