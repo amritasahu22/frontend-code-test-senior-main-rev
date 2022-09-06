@@ -7,7 +7,7 @@ import { useCart } from '../hooks/useCart';
 
 test('should render product', async () => {
 	const { getByTitle } = render(<Product productData={mockProducts[0]} />);
-	expect(getByTitle('image')).toBeInTheDocument();
+	expect(getByTitle('Test name 1')).toBeInTheDocument();
 	expect(getByTitle('name')).toHaveTextContent('Test name 1');
 	expect(getByTitle('subTitle')).toHaveTextContent('25W // Packet of 4');
 	expect(getByTitle('price')).toHaveTextContent('£10.99');

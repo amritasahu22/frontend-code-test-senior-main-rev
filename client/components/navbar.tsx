@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import CartContext from '../context/cartContext';
 import { useContext } from 'react';
 
@@ -9,7 +10,7 @@ export default function Navbar() {
 		<header className='container-lg pt-3 d-flex justify-content-between align-items-center'>
 			<Link href='/'>
 				<a className='navbar-brand'>
-					<img
+					<Image
 						src='/octopus-logo.svg'
 						alt='Octopus Energy Logo'
 						width='200'
@@ -21,7 +22,7 @@ export default function Navbar() {
 			<nav className='navbar'>
 				<Link href='/cart'>
 					<a className='position-relative me-2'>
-						<img src='/basket.svg' alt='Basket Icon' width='35' height='40' />
+						<Image src='/basket.svg' alt='Basket Icon' width='30' height='40' />
 						<span
 							className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary'
 							title='Basket items'

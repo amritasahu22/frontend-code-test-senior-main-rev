@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import Image from 'next/image';
 import Head from 'next/head';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { IProductField } from '../../types/product';
@@ -58,12 +59,16 @@ export default function Product({ productData }: ProductProps) {
 
 				<section className='container-lg p-4' id='product-info'>
 					<div className='row'>
-						<div className='col-sm-6 col-lg-5'>
-							<img
+						<div className='col-sm-6 col-lg-5 my-2'>
+							<Image
 								src={productData.img_url}
-								className='img-fluid rounded-5 my-2'
+								height='100%'
+								width='100%'
+								layout='responsive'
 								alt={productData.name}
-								title='image'
+								priority
+								className='rounded-5'
+								title={productData.name}
 							/>
 						</div>
 						<div className='col-sm-6 col-lg-7 px-md-5 p-2'>

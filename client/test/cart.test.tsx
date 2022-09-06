@@ -1,12 +1,18 @@
-import { render, fireEvent, within } from '@testing-library/react';
+import {
+	render,
+	fireEvent,
+	within,
+	getByAltText,
+	getAllByRole,
+} from '@testing-library/react';
 import Cart from '../pages/cart';
 import CartContext from '../context/cartContext';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useCart } from '../hooks/useCart';
-import { mockProducts } from './_mocks_/mock';
+import { mockProducts, mockProd } from './_mocks_/mock';
 
 test('should render product', async () => {
-	const { getByText, getByTitle } = render(<Cart />);
+	const { getByText } = render(<Cart />);
 	expect(getByText(/Review Cart/i)).toBeInTheDocument();
 	expect(getByText(/Order Summary/i)).toBeInTheDocument();
 });
@@ -22,14 +28,16 @@ test('should render a message when cart is empty and show correct subTotal', asy
 		</CartContext.Provider>
 	);
 
-	const message = queryByText(/Your shopping bag is empty/);
+	const message = queryByText('Your shopping bag is empty');
 	expect(message).toBeInTheDocument();
+	const shopButton = queryByText('Shop now');
+	expect(shopButton).toBeInTheDocument();
 	const subTotal = getByTitle('subtotal');
 	expect(subTotal).toHaveTextContent('0');
 });
 
 test('should not render a message when cart has items and show correct subTotal', async () => {
-	const { result, rerender } = renderHook(() => useCart());
+	const { result } = renderHook(() => useCart());
 
 	act(() => {
 		result.current.addToCart(mockProducts[0], 1);
@@ -43,10 +51,31 @@ test('should not render a message when cart has items and show correct subTotal'
 		</CartContext.Provider>
 	);
 
-	const message = queryByText(/Your shopping bag is empty/);
-	expect(message).toBeNull();
+	const message = queryByText('Your shopping bag is empty');
+	expect(message).not.toBeInTheDocument();
+	const shopButton = queryByText('Shop now');
+	expect(shopButton).not.toBeInTheDocument();
 	const subTotal = getByTitle('subtotal');
 	expect(subTotal).toHaveTextContent('£10.99');
+});
+
+test('should have link to product details page', () => {
+	const { result } = renderHook(() => useCart());
+
+	act(() => {
+		result.current.addToCart(mockProducts[0], 1);
+	});
+
+	expect(result.current.cartItems.length).toBe(1);
+
+	const { getByTestId } = render(
+		<CartContext.Provider value={result.current}>
+			<Cart />
+		</CartContext.Provider>
+	);
+
+	const productDetailsUrl = getByTestId('item-link');
+	expect(productDetailsUrl).toHaveAttribute('href', '/products/100');
 });
 
 test('should remove item from cart', async () => {

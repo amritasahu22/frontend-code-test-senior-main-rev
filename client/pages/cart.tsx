@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
 import Footer from '../components/footer';
@@ -38,13 +39,18 @@ export default function Cart() {
 									>
 										<div className='d-flex'>
 											<Link href={`/products/${item.id}`}>
-												<a className='text-decoration-none'>
-													<img
+												<a
+													className='text-decoration-none mt-2'
+													data-testid='item-link'
+												>
+													<Image
 														src={item.img_url}
-														className='rounded-2 mt-2'
+														height={100}
+														width={100}
 														alt={item.name}
-														title='image'
-														height='100px'
+														layout='fixed'
+														priority
+														className='rounded-4'
 													/>
 												</a>
 											</Link>
