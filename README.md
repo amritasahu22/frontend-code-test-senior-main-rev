@@ -68,8 +68,11 @@ Notes:
 
 Best of luck!
 
-## Improvements
+## Pages
+Product Details - http://localhost:3000/products/1, http://localhost:3000/products/2, http://localhost:3000/products/3
+Cart - http://localhost:3000/cart
 
+## Improvements
 - Increment and decrease quantity component can be added to cart page
 - Error handling can be improved by adding custom pages and Error boundary
 - End-to-End testing can be added using Cypress and Playwright framework
