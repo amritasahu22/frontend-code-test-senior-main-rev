@@ -67,3 +67,20 @@ Notes:
 - This has not been set up with and type of CSS-in-JS, but if that is something you would like to add, please feel free.
 
 Best of luck!
+
+## Improvements
+
+- Increment and decrease quantity component can be added to cart page
+- Error handling can be improved by adding custom pages and Error boundary
+- End-to-End testing can be added using Cypress and Playwright framework
+- Test Coverage & Styling can be improved
+- Accessibility can be added with ARIA properties
+- Use typescript, graphql, bootstrap, sass
+
+## Note:
+
+Data returned is null when trying to retrieve Product by Id or filter ID due to mock graphql issue
+
+export const GET_PRODUCT_QUERY_BY_ID = gql`query getProducts($id: ID) { Product(id: $id) { fields } }`;
+
+Using Primary key(pk) as unique key
