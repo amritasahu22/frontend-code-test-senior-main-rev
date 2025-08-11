@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { IProductField } from '../types/product';
+import { IProduct } from '../types/product';
 import { CartItem } from '../types/cart';
 
 export interface ICartContext {
-	addToCart: (product: IProductField, quantity: number) => void;
+	addToCart: (product: IProduct, quantity: number) => void;
 	totalPrice: number;
 	totalQuantity: number;
 	cartItems: CartItem[];

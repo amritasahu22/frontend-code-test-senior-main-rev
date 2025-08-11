@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IProductField } from '../types/product';
+import { IProduct } from '../types/product';
 import { CartItem } from '../types/cart';
 
 const CART_STATE_KEY = 'cart';
@@ -27,7 +27,7 @@ export function useCart() {
 		window.localStorage.setItem(CART_STATE_KEY, data);
 	}, [cart]);
 
-	const addToCart = (product: IProductField, qty: number) => {
+	const addToCart = (product: IProduct, qty: number) => {
 		const { id, name, power, quantity, price, brand, img_url } = product;
 		const pricePerUnit = Number((price / 100).toFixed(2));
 

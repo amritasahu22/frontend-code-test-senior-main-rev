@@ -1,7 +1,7 @@
 import { CartItem } from '../../types/cart';
-import { IProductField } from '../../types/product';
+import { IProduct } from '../../types/product';
 
-export const mockProducts: IProductField[] = [
+export const mockProducts: IProduct[] = [
 	{
 		id: 100,
 		name: 'Test name 1',
