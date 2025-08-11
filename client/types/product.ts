@@ -1,9 +1,4 @@
 export interface IProduct {
-	pk: number;
-	fields?: IProductField;
-}
-
-export interface IProductField {
 	id: number;
 	name: string;
 	power: string;
@@ -18,4 +13,39 @@ export interface IProductField {
 	model_code: string;
 	colour: string;
 	img_url: string;
+	created_at?: string;
+	updated_at?: string;
+}
+
+/**
+ * GraphQL Collection Response structure
+ */
+export interface IProductsCollection {
+	edges: Array<{
+		node: IProduct;
+	}>;
+	pageInfo?: {
+		hasNextPage: boolean;
+		hasPreviousPage: boolean;
+		startCursor?: string;
+		endCursor?: string;
+	};
+}
+
+/**
+ * GraphQL Response wrapper
+ */
+export interface IProductsResponse {
+	productsCollection: IProductsCollection;
+}
+
+/**
+ * Single Product Response
+ */
+export interface IProductResponse {
+	productsCollection: {
+		edges: Array<{
+			node: IProduct;
+		}>;
+	};
 }
