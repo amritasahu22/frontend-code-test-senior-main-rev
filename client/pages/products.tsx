@@ -47,34 +47,31 @@ export default function Catalogue({ products }: CatalogueProps) {
 				/>
 			</Head>
 
-			<div className="min-h-screen flex flex-col">
-				<main className="flex-1">
-					{/* Header */}
-					<section className="bg-blue-600 text-white py-12">
-						<div className="max-w-7xl mx-auto px-4 text-center">
-							<h1 className="text-xl mb-4">Product Catalogue</h1>
-							<p className="text-xl">
-								Discover our electrical products from trusted brands
-							</p>
-							<div className="mt-4">
-								<span className="bg-opacity-20 px-4 py-2 rounded-lg text-sm font-medium">
-									{products.length} Products
-								</span>
-							</div>
+			<main className="home">
+				{/* Header */}
+				<section className="text-white py-12 mt-4">
+					<div className="max-w-7xl mx-auto text-center">
+						<p className="h2 text-sm mb-4">Product Catalogue</p>
+						<p className="text-sm">
+							Discover our electrical products from trusted brands
+						</p>
+						<div className="mt-4">
+							<span className="bg-opacity-20 px-4 py-2 rounded-lg text-sm font-medium">
+								{products.length} Products
+							</span>
 						</div>
-					</section>
+					</div>
+				</section>
 
-					{/* Products Grid */}
-					<section className="container-lg p-4">
-						<div className="row">
-							{products.map(product => (
-								<ProductCard key={product.id} product={product} />
-							))}
-						</div>
-					</section>
-				</main>
-				<Footer />
-			</div>
+				{/* Products Grid */}
+				<section className="container-lg p-4">
+					<div className="row">
+						{products.map(product => (
+							<ProductCard key={product.id} product={product} />
+						))}
+					</div>
+				</section>
+			</main>
 		</>
 	);
 }
@@ -89,21 +86,31 @@ function ProductCard({ product }: ProductCardProps) {
 
 	return (
 		<div className="col-sm-6 col-lg-4 my-2">
-			<div className="relative bg-gray-50 p-4 h-64 flex items-center justify-center">
-				<Link href={`/products/${product.id}`}>
-					<a className="hover:cursor-pointer block">
+			<div className="card h-100 d-flex flex-column p-3">
+				<Link
+					href={`/products/${product.id}`}
+					className="hover:cursor-pointer block w-100"
+				>
+					<div
+						style={{
+							position: 'relative',
+							width: '100%',
+							height: '300px',
+							marginBottom: '1rem',
+						}}
+					>
 						<Image
 							src={product.img_url}
-							height={100}
-							width={100}
-							layout="responsive"
 							alt={product.name}
-							priority
-							className="rounded-5"
+							fill
+							className="rounded-1"
 							title={product.name}
+							sizes="(max-width: 400px) 100vw, 400px"
+							style={{ objectFit: 'fill' }}
 						/>
-					</a>
+					</div>
 				</Link>
+
 				<h2 className={styles.heading} title="name">
 					{product.name}
 				</h2>
@@ -111,7 +118,7 @@ function ProductCard({ product }: ProductCardProps) {
 					{product.brand} <span title="power">{product.power}</span>
 				</p>
 				<Price className={styles.price} price={product.price} />
-				<div className="d-grid mt-4">
+				<div className="d-grid mt-2">
 					<button
 						className="btn btn-primary text-siphon btn-lg rounded my-2"
 						onClick={() => router.push(`/products/${product.id}`)}

@@ -16,15 +16,16 @@
 		"cross-fetch": "^4.1.0",
 		"gql": "^1.1.2",
 		"graphql": "^16.11.0",
-		"next": "^13.4.10",
-		"react": "17.0.2",
-		"react-dom": "17.0.2"
+		"next": "13.4.10",
+		"react": "18.2.0",
+		"react-dom": "18.2.0"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/react": "^12.1.5",
 		"@testing-library/react-hooks": "^8.0.1",
 		"@testing-library/user-event": "^14.4.3",
+		"@types/react": "19.1.9",
 		"eslint": "^8.19.0",
 		"eslint-config-next": "^12.2.1",
 		"jest": "^28.1.2",
